@@ -1,0 +1,8 @@
+{
+      "storage.default-namespace": "default",
+      "storage.mysql-engine.max-size": 33554432,
+      "mysql.host": "{{MYSQL_HOST}}",
+      "mysql.user": "{{MYSQL_USER}}",
+      "mysql.pass": "{{MYSQL_PASS}}",
+      "pygments.enabled": true
+}
