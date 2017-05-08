@@ -40,11 +40,17 @@ RUN apt-get clean && apt-get update && apt-get install -y \
     sudo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Clone phabricator stable branch
+# Clone phabricator stable branch, cause sometimes can't clone code from github in china, use curl download archive file
 WORKDIR /opt
-RUN git clone https://github.com/phacility/phabricator.git phabricator \
-    && git clone https://github.com/phacility/arcanist.git arcanist  \
-    && git clone https://github.com/phacility/libphutil.git libphutil \
+#RUN git clone https://github.com/phacility/phabricator.git phabricator \
+#    && git clone https://github.com/phacility/arcanist.git arcanist  \
+#    && git clone https://github.com/phacility/libphutil.git libphutil \
+RUN curl -L https://codeload.github.com/phacility/phabricator/tar.gz/stable | tar -xzf - \
+        && curl -L https://codeload.github.com/phacility/arcanist/tar.gz/stable | tar -xzf - \
+        && curl -L https://codeload.github.com/phacility/libphutil/tar.gz/stable | tar -xzf - \
+        && mv phabricator-stable phabricator \
+        && mv arcanist-stable arcanist \
+        && mv libphutil-stable libphutil
 
 # Setup apache
 RUN a2enmod rewrite
